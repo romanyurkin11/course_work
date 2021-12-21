@@ -1,0 +1,76 @@
+{% extends 'accounts/main.html' %} {% block content %}
+
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Customer:</h5>
+                <hr />
+                <a class="btn btn-outline-info btn-sm btn-block" href="{% url 'update_customer' customer.id %}">Update Customer Data</a>
+                <a class="btn btn-outline-danger btn-sm btn-block mt-1" href="{% url 'delete_customer' customer.id %}">Delete Customer</a>
+            </div>
+        </div>
+
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Contact Information</h5>
+                <hr />
+                <p>Name: {{ customer.name }}</p>
+                <p>Email: {{ customer.email }}</p>
+                <p>Phone: {{ customer.phone }}</p>
+            </div>
+        </div>
+
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Total Orders</h5>
+                <hr />
+                <h1 style="text-align: center; padding: 10px;">{{ orders_count }}</h1>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card card-body">
+                <form method="get" style="display: flex; flex-direction: column;">
+                    {% csrf_token %} {{ myFilter.form }}
+                    <button class="btn btn-primary mt-4" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Note</th>
+                        <th>Date Ordered</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Remove</th>
+                    </tr>
+                    {% for i in orders %}
+                    <tr>
+                        <td>{{i.product.name}}</td>
+                        <td>{{i.product.category}}</td>
+                        <td>{{i.note}}</td>
+                        <td>{{i.date_created}}</td>
+                        <td>{{i.status}}</td>
+                        <td><a href="{% url 'update_order' i.id %}" class="btn btn-primary btn-sm">Update</a></td>
+                        <td><a href="{% url 'delete_order' i.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

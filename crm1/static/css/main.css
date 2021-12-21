@@ -1,0 +1,24 @@
+#logo {
+}
+body {
+    background-color: #ebeff5;
+}
+
+#total-orders {
+    background-color: #4cb4c7;
+}
+
+#orders-delivered {
+    background-color: #7abecc;
+}
+
+#orders-pending {
+    background-color: #7cd1c0;
+}
+
+.create_order {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
+}
